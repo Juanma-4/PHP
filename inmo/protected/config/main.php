@@ -25,7 +25,7 @@ return array(
 		'application.modules.cruge.extensions.crugemailer.*',*/
 	),
 
-	'defaultController'=>'post',
+	'defaultController'=>'Site',
 
 	// application components
 	'components'=>array(
@@ -96,6 +96,7 @@ return array(
 		'authManager' => array(
 			'class' => 'CDbAuthManager',
 			'connectionID' => 'db', 
+			
 		),
 
 	/*	'user'=>array(

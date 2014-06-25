@@ -1,6 +1,6 @@
 <?php $this->beginContent('//layouts/main'); ?>
         <!-- menu principal de cabecera inicio -->
-        <?php $this->widget('bootstrap.widgets.BootNavbar', array(
+     <!--   <?php /*$this->widget('bootstrap.widgets.BootNavbar', array(
                 'fixed'=>false,
                 'brand'=>Yii::app()->name,
                 'brandUrl'=>'index.php?r=site/index',
@@ -24,10 +24,10 @@
                                 'items'=>Yii::app()->uimanager->menuSistema,
                         ),
                 ),
-        )); ?>
+        )); */?>
         <!-- menu principal de cabecera fin -->
         
-        <!-- menu lateral inicio -->
+        <!-- menu lateral inicio -->SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSsss
         <div class="container-fluid">
                 <div class="row-fluid"> 
                         <?php echo $content; ?>

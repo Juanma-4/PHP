@@ -7,6 +7,25 @@ class RolController extends Controller
 		
 		$auth=Yii::app()->authManager;
 
+		//$auth->createOperation('crearEmpleado','crear un empleado');
+		$role=$auth->createRole('Agente');
+	
+		$role=$auth->createRole('Administrativo');
+		$role->addChild('Agente');
+
+
+
+		$role=$auth->createRole('Director');
+		$role->addChild('Administrativo');
+		
+		$auth->assign('Director','11111111');
+
+		
+	//	$role=$auth->createRole('Cliente'); comentamos porque es el visitante
+
+
+
+/*
 		$auth->createOperation('createPost','create a post');
 		$auth->createOperation('readPost','read a post');
 		$auth->createOperation('updatePost','update a post');
@@ -41,7 +60,7 @@ class RolController extends Controller
 		$this->render('create');
 
 		//return Yii::app()->user->id==$params["post"]->author_id;
-		
+		*/
 	}
 
 	public function actionIndex()
