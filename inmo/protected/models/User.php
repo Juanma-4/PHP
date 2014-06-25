@@ -29,7 +29,7 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('cedula, nombre, apellido, password, email', 'required'),
-			array('cedula', 'length', 'max'=>8),
+			array('cedula', 'length', 'min'=>8,'max'=>8),
 			array('nombre, apellido', 'length', 'max'=>20),
 			array('password', 'length', 'max'=>129),
 			array('email', 'length', 'max'=>60),

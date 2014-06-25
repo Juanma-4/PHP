@@ -49,6 +49,13 @@
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
+	<div class="row">
+		<select name="rol" id="rol">
+		<option value="Administrativo">Administrativo</option>
+		<option value="Agente" selected="selected">Agente</option>
+		</select>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

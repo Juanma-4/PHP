@@ -22,7 +22,11 @@ class SiteController extends Controller
 			),
 		);
 	}
-
+	public function actionIndex()
+	{
+		
+		$this->render('index');
+	}
 	/**
 	 * This is the action to handle external exceptions.
 	 */

@@ -71,9 +71,26 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+
 			$model->password=$model->hashPassword($model->password);
 			if($model->save())
+			{
+				
+
+				$auth=Yii::app()->authManager;
+				if($_POST['rol']=="Administrativo"){
+					$auth->assign('Administrativo',$model->cedula);
+				}
+				else{
+					$auth->assign('Agente',$model->cedula);
+
+				}
+
 				$this->redirect(array('view','id'=>$model->cedula));
+
+				
+			}
+
 		}
 
 		$this->render('create',array(
