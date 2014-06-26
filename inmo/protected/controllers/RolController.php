@@ -18,7 +18,7 @@ class RolController extends Controller
 		$role=$auth->createRole('Director');
 		$role->addChild('Administrativo');
 		
-		$auth->assign('Director','11111111');
+		//$auth->assign('Director','11111111');
 
 		
 	//	$role=$auth->createRole('Cliente'); comentamos porque es el visitante

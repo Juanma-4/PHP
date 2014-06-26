@@ -1,23 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "Usuarios".
+ * This is the model class for table "Casas".
  *
- * The followings are the available columns in table 'Usuarios':
- * @property string $cedula
- * @property string $nombre
- * @property string $apellido
- * @property string $password
- * @property string $email
+ * The followings are the available columns in table 'Casas':
+ * @property integer $IdInmueble
+ * @property integer $piscina
+ * @property integer $parrillero
+ * @property integer $cantPatios
+ *
+ * The followings are the available model relations:
+ * @property Inmuebles $idInmueble
  */
-class User extends CActiveRecord
+class Casas extends Inmuebles
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'Usuarios';
+		return 'Casas';
 	}
 
 	/**
@@ -28,14 +30,11 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cedula, nombre, apellido, password, email', 'required'),
-			array('cedula', 'length', 'min'=>8,'max'=>8),
-			array('nombre, apellido', 'length', 'max'=>20),
-			array('password', 'length', 'max'=>129),
-			array('email', 'length', 'max'=>60),
+			array('IdInmueble, piscina, parrillero, cantPatios', 'required'),
+			array('IdInmueble, piscina, parrillero, cantPatios', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('cedula, nombre, apellido, password, email', 'safe', 'on'=>'search'),
+			array('IdInmueble, piscina, parrillero, cantPatios', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,8 +45,9 @@ class User extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-
-		return array( 'clientes'=>array(self::HAS_MANY, 'Clientes', 'cedulaUsuario'),);
+		return array(
+			'idInmueble' => array(self::BELONGS_TO, 'Inmuebles', 'IdInmueble'),
+		);
 	}
 
 	/**
@@ -56,11 +56,10 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cedula' => 'Cedula',
-			'nombre' => 'Nombre',
-			'apellido' => 'Apellido',
-			'password' => 'Password',
-			'email' => 'Email',
+			'IdInmueble' => 'Id Inmueble',
+			'piscina' => 'Piscina',
+			'parrillero' => 'Parrillero',
+			'cantPatios' => 'Cant Patios',
 		);
 	}
 
@@ -82,11 +81,10 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('cedula',$this->cedula,true);
-		$criteria->compare('nombre',$this->nombre,true);
-		$criteria->compare('apellido',$this->apellido,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('email',$this->email,true);
+		$criteria->compare('IdInmueble',$this->IdInmueble);
+		$criteria->compare('piscina',$this->piscina);
+		$criteria->compare('parrillero',$this->parrillero);
+		$criteria->compare('cantPatios',$this->cantPatios);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -97,24 +95,10 @@ class User extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Casas the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-	public function validatePassword($password)
-	{
-		return CPasswordHelper::verifyPassword($password,$this->password);
-	}
-
-	/**
-	 * Generates the password hash.
-	 * @param string password
-	 * @return string hash
-	 */
-	public function hashPassword($password)
-	{
-		return CPasswordHelper::hashPassword($password);
 	}
 }

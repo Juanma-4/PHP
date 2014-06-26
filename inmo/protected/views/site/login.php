@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 <p>Please fill out the following form with your login credentials:</p>
 
-<div class="form">
+<div class="form" style="margin-left:20px;">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableAjaxValidation'=>true,
@@ -19,7 +19,7 @@ $this->breadcrumbs=array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'cedula'); ?>
-		<?php echo $form->textField($model,'cedula'); ?>
+		<?php echo $form->textField($model,'cedula',array('size'=>8,'maxlength'=>8)); ?>
 		<?php echo $form->error($model,'cedula'); ?>
 	</div>
 
@@ -27,9 +27,6 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <tt>demo/demo</tt>.
-		</p>
 	</div>
 
 	<div class="row rememberMe">

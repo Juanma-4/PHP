@@ -24,6 +24,8 @@
         array('label' => 'Profile', 'url' => '#'),
         array('label' => 'Settings', 'url' => '#'),
         '',
+        array('label' => 'CrearCliente', 'url' => array('clientes/Create')),
+        array('label' => 'Administrar Clientes', 'url' => array('clientes/Admin')),
         array('label' => 'CrearEmpleado', 'url' => array('user/Create')),
         array('label' => 'Administrar Empleados', 'url' => array('user/Admin')),
         )
@@ -50,7 +52,8 @@
         array('label' => 'Profile', 'url' => '#'),
         array('label' => 'Settings', 'url' => '#'),
         '',
-      
+        array('label' => 'CrearCliente', 'url' => array('clientes/Create')),
+        array('label' => 'Administrar Clientes', 'url' => array('clientes/Admin')),
         )
         )
         );

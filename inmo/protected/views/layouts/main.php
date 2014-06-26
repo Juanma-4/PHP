@@ -10,8 +10,6 @@
 	<!-- <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" /> -->
    
      <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/stylepropio.css" /> 
-
-
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -150,18 +148,16 @@ $this->widget(
 			),
 		)); 
 		*/?>-->
-        <?php echo $content; ?>
+        
+        
 	</div><!-- mainmenu -->
+<?php echo $content; ?>
 
-
-	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-		'links'=>$this->breadcrumbs,
-	)); ?><!-- breadcrumbs -->
 
 	
 
 
-	<div id="footer" style="width:100%;text-align: center; background-color:#600000; color:#ffffff;">
+	<div id="footer" style="width:100%;text-align: center; background-color:#600000; color:#ffffff; float:left;">
 		Copyright &copy; <?php echo date('Y'); ?> by Grupo 3.<br/>
 		None Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>

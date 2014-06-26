@@ -1,6 +1,8 @@
 <div class="Image-Container">
 <?php 
     
+
+
     $this->widget(
     'bootstrap.widgets.TbCarousel',
     array(
@@ -37,12 +39,6 @@
             
 
         <div class="col-md-9">
-
-               
-
-
-
-
 
                 <!-- <div class="row carousel-holder">
                     <div class="col-md-12">

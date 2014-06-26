@@ -8,7 +8,7 @@
 class UserIdentity extends CUserIdentity
 {
 	//private $_id;
-
+	private $ci;
 	/**
 	 * Authenticates a user.
 	 * @return boolean whether authentication succeeds.
@@ -30,7 +30,7 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 		{echo "<br/> Llegue aca";
-			//$this->_id=$user->id;
+			$this->ci=$user->cedula;
 			$this->username=$user->cedula;
 			$this->errorCode=self::ERROR_NONE;
 		}
@@ -40,6 +40,13 @@ class UserIdentity extends CUserIdentity
 	/**
 	 * @return integer the ID of the user record
 	 */
+
+
+	public function getCi(){	
+
+	return $this->ci;	
+
+	}
 	/*public function getId()
 	{
 		return $this->_id;

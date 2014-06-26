@@ -1,12 +1,12 @@
 <?php
 
-class UserController extends Controller
+class ClientesController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='column1';
+	public $layout='//layouts/column1';
 
 	/**
 	 * @return array action filters
@@ -29,16 +29,17 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
+				'roles'=>array('Director','Administrativo'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				//'roles'=>array('Director'),
+				'users'=>array('@'),
+				'roles'=>array('Director','Administrativo'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				//'roles'=>array('Director'),
-
+				'roles'=>array('Director','Administrativo'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -63,38 +64,19 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new User;
+		$model=new Clientes;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['Clientes']))
 		{
-			$model->attributes=$_POST['User'];
-
-			$model->password=$model->hashPassword($model->password);
-			
-			if($model->save())
-			{
-				
-
-				$auth=Yii::app()->authManager;
-				
-
-
-				if($_POST['rol']=="Administrativo"){
-					$auth->assign('Administrativo',$model->cedula);
-				}
-				else{
-					$auth->assign('Agente',$model->cedula);
-
-				}
-
+			$model->attributes=$_POST['Clientes'];
+			$model->cedulaUsuario = Yii::app()->user->id;
+	
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->cedula));
-			
-				
 			}
-
 		}
 
 		$this->render('create',array(
@@ -114,9 +96,9 @@ class UserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['Clientes']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['Clientes'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->cedula));
 		}
@@ -145,7 +127,7 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
+		$dataProvider=new CActiveDataProvider('Clientes');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -156,10 +138,10 @@ class UserController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new User('search');
+		$model=new Clientes('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
+		if(isset($_GET['Clientes']))
+			$model->attributes=$_GET['Clientes'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -170,12 +152,12 @@ class UserController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return User the loaded model
+	 * @return Clientes the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=User::model()->findByPk($id);
+		$model=Clientes::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -183,11 +165,11 @@ class UserController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param User $model the model to be validated
+	 * @param Clientes $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='clientes-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
